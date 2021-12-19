@@ -1,0 +1,8 @@
+{
+  "name": "env2deepconf",
+  "version": "1.0.0",
+  "description": "Takes environment variables and converts into a deeply nested configuration object based on a convention of double underscore (__) translating to a level of nesting in the config json (.) ",
+  "keywords": [],
+  "main": "/index.html",
+  "dependencies": {}
+}
