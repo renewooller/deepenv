@@ -1,10 +1,10 @@
 const _set = require('lodash/set')
 
 let prefix = "DEEPENV_"
-let nesting_divider = "__"
+let nesting_delimiter = "__"
 
 exports.prefix = prefix
-exports.nesting_divider = nesting_divider
+exports.nesting_delimiter = nesting_delimiter
 
 function parseEnvValue(value) {
     // don't convert blanks into numbers, use  them
@@ -29,8 +29,9 @@ function parseEnvValue(value) {
     return value;
 }
 
-exports.config  = function config(custom_prefix) {
-    prefix = custom_prefix || prefix
+exports.config  = function config(opts) {
+    prefix = opts?.custom_prefix || prefix
+    nesting_delimiter = opts?.custom_nesting_delimiter || nesting_delimiter
     return Object.keys(process.env) // [<keys>]
     .filter(key=>key.startsWith(prefix)) // keys starting with prefix
     .map(key=> [key, parseEnvValue(process.env[key]) ] )  //   [ <key>, <parsed value> ]
@@ -38,7 +39,7 @@ exports.config  = function config(custom_prefix) {
         let path = key
             .toLowerCase()
             .slice(prefix.length) // <prefix>_a_b -> a_b
-            .split("__") // A__B_C__D -> [A, B_C, D]   // this is a convention that '__' in an env var equates to '.' in an object
+            .split(nesting_delimiter) // A__B_C__D -> [A, B_C, D]   // this is a convention that '__' in an env var equates to '.' in an object
             .join('.') // [A, B_C, D] -> a.b_c.d 
         _set(obj, path, value)
         return obj;
