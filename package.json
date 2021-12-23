@@ -8,6 +8,10 @@
     "configuration"
   ],
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/renewooller/deepenv.git"
+  },
   "scripts": {
     "test": "jest"
   },
