@@ -3,7 +3,7 @@ Generates a deeply nested configuration object suitable for backend apps, using 
 
 [![NPM version](https://img.shields.io/npm/v/deepenv.svg?style=flat-square)](https://www.npmjs.com/package/deepenv)
 
-[Best practice](https://12factor.net/config) demands that configuration should be contained in the environment rather than in code. This helps with security, managing environments, portability and open-source development.
+[Best practice](https://12factor.net/config) demands that configuration that changes across environments should be contained in the environment rather than in code. This helps with security, managing environments, portability and open-source development.
 
 Unfortunately environment variables are **flat** string key-value pairs, whereas most apps organise their configuration in **deeply nested** objects. Environment variable names cannot include a period to indicate nesting. 
 
