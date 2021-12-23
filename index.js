@@ -29,7 +29,18 @@ function parseEnvValue(value) {
     return value;
 }
 
-exports.config  = function config(opts) {
+/**
+ * returns a copy 
+ * @param {*} original (optional) 
+ * @param {} opts (optional) options to specify the
+ *   prefix:  for environment variable names that are to be included in configurations, default "DEEPENV_"
+ *   nesting_delimiter: the delimiter in the environment variable name used to signify a nesting level in the config object, default "__" 
+ * @returns 
+ */
+exports.config  = function config(
+    original,
+    opts, 
+    ) {
     prefix = opts?.custom_prefix || prefix
     nesting_delimiter = opts?.custom_nesting_delimiter || nesting_delimiter
     return Object.keys(process.env) // [<keys>]
@@ -41,7 +52,7 @@ exports.config  = function config(opts) {
             .slice(prefix.length) // <prefix>_a_b -> a_b
             .split(nesting_delimiter) // A__B_C__D -> [A, B_C, D]   // this is a convention that '__' in an env var equates to '.' in an object
             .join('.') // [A, B_C, D] -> a.b_c.d 
-        _set(obj, path, value)
+        _set(obj, path, value) // overwrite the value from the original config, or, if it doesn't exist, creat it
         return obj;
-    }, {})
+    }, Object.assign({}, original)) // one day, this could be structuredClone(original)
 }

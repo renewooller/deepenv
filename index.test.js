@@ -80,4 +80,38 @@ describe('parse', () => {
             })
     })
 
+    test('merge existing config', () => {
+        process.env[`DEEPENV_OUTER__INNER__NUMBER`] = '12'
+        process.env[`DEEPENV_TO_OVERRIDE`] = '4'
+
+        let original_config = {
+            other_outer : 2,
+            to_override : 1
+        }
+
+        const config = require('./index.js').config(original_config, {})
+
+        expect(config).toEqual(
+            {
+                other_outer : 2,
+                outer : {
+                    inner : {
+                        number : 12
+                    }
+                },
+                to_override : 4
+            }
+        )
+
+        // check that it is a new object not a reference
+        expect(config).not.toBe(original_config)
+
+        // check the original config hasn't been modified
+        expect(original_config).toEqual({
+            other_outer : 2,
+            to_override : 1
+        })
+
+    })
+
 })
