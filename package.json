@@ -3,6 +3,15 @@
   "version": "1.0.0",
   "description": "Takes environment variables and converts into a deeply nested configuration object based on a convention of double underscore (__) translating to a level of nesting in the config json (.) ",
   "keywords": [],
-  "main": "/index.html",
-  "dependencies": {}
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "jest": "^27.4.5"
+  }
 }
