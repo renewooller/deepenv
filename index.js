@@ -1,4 +1,4 @@
-const _set = require('lodash/set')
+const _set = require('lodash.set')
 
 let prefix = "DEEPENV_"
 let nesting_delimiter = "__"

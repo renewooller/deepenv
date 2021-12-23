@@ -1,15 +1,18 @@
 {
   "name": "deepenv",
   "version": "1.0.0",
-  "description": "Takes environment variables and converts into a deeply nested configuration object based on the convention of double underscore (__) translating to a level of nesting in the config json (.) ",
-  "keywords": [],
+  "description": "Takes environment variables and converts into a deeply nested configuration object based on a customisable delimiter (__) to represent a level of nesting in the config json (.) ",
+  "keywords": [
+    "environment variables",
+    "object",
+    "configuration"
+  ],
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
     "test": "jest"
   },
   "dependencies": {
-    "lodash": "^4.17.21"
+    "lodash.set": "^4.3.2"
   },
   "devDependencies": {
     "jest": "^27.4.5"
