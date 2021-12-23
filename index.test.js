@@ -2,14 +2,14 @@
 describe('parse', () => {
 
     beforeEach(() => { // clear the config from previous tests
-        Object.keys(process.env).filter(item => /^ENV2DEEPCONF_/i.test(item)).forEach(item => delete process.env[item])
+        Object.keys(process.env).filter(item => /^DEEPENV_/i.test(item)).forEach(item => delete process.env[item])
     })
 
     test('parse nulls', () => {
-        process.env['ENV2DEEPCONF_BLANK'] = ''
-        process.env['ENV2DEEPCONF_SPACES'] = '   '
-        process.env['ENV2DEEPCONF_NULLTEXT'] = 'null'
-        process.env['ENV2DEEPCONF_UNDEFINEDTEXT'] = 'undefined'
+        process.env['DEEPENV_BLANK'] = ''
+        process.env['DEEPENV_SPACES'] = '   '
+        process.env['DEEPENV_NULLTEXT'] = 'null'
+        process.env['DEEPENV_UNDEFINEDTEXT'] = 'undefined'
         const config  = require('./index.js').config()
         
         expect(config['blank']).toBeUndefined()
@@ -19,11 +19,11 @@ describe('parse', () => {
     })
 
     test('parse numbers', () => {
-        process.env[`ENV2DEEPCONF_NUMBER`] = '12'
-        process.env[`ENV2DEEPCONF_NUMBER_ZERO`] = '0'
-        process.env[`ENV2DEEPCONF_NUMBER_ONE`] = '1'
-        process.env[`ENV2DEEPCONF_NUMBER_NEGATIVE`] = '-1'
-        process.env[`ENV2DEEPCONF_NUMBER_NEGATIVE100`] = '-100'
+        process.env[`DEEPENV_NUMBER`] = '12'
+        process.env[`DEEPENV_NUMBER_ZERO`] = '0'
+        process.env[`DEEPENV_NUMBER_ONE`] = '1'
+        process.env[`DEEPENV_NUMBER_NEGATIVE`] = '-1'
+        process.env[`DEEPENV_NUMBER_NEGATIVE100`] = '-100'
         
         
         const config = require('./index.js').config()
@@ -35,12 +35,12 @@ describe('parse', () => {
     })
     
     test('parse_boolean', () => {
-        process.env[`ENV2DEEPCONF_BOOLEANTRUE`] = 'true'
-        process.env[`ENV2DEEPCONF_BOOLEANFALSE`] = 'false'
-        process.env[`ENV2DEEPCONF_BOOLEANTRUE_UC`] = 'TRUE'
-        process.env[`ENV2DEEPCONF_BOOLEANFALSE_UC`] = 'FALSE'
-        process.env[`ENV2DEEPCONF_BOOLEANTRUE_NC`] = 'True'
-        process.env[`ENV2DEEPCONF_BOOLEANFALSE_NC`] = 'False'
+        process.env[`DEEPENV_BOOLEANTRUE`] = 'true'
+        process.env[`DEEPENV_BOOLEANFALSE`] = 'false'
+        process.env[`DEEPENV_BOOLEANTRUE_UC`] = 'TRUE'
+        process.env[`DEEPENV_BOOLEANFALSE_UC`] = 'FALSE'
+        process.env[`DEEPENV_BOOLEANTRUE_NC`] = 'True'
+        process.env[`DEEPENV_BOOLEANFALSE_NC`] = 'False'
 
         const config = require('./index.js').config()
 
@@ -57,8 +57,8 @@ describe('parse', () => {
 
     test('parse json', () => {
         const obj = { levelOne: { levelTwo : { levelThree : {}}}, num: 0, txt: 'txt', boolTrue: true, boolFalse: false}
-        process.env[`ENV2DEEPCONF_JSON`] = JSON.stringify(obj)
-        process.env[`ENV2DEEPCONF_MALFORMED_JSON`] = '{"levelOne":{"levelTwo":{"levelThree":{}}},"num":0,"txt":"txt","boolTrue":true,"boolFalse":false'
+        process.env[`DEEPENV_JSON`] = JSON.stringify(obj)
+        process.env[`DEEPENV_MALFORMED_JSON`] = '{"levelOne":{"levelTwo":{"levelThree":{}}},"num":0,"txt":"txt","boolTrue":true,"boolFalse":false'
         const config = require('./index.js').config()
 
         expect(config['json']).toEqual(obj)
@@ -66,7 +66,7 @@ describe('parse', () => {
     })
 
     test('multilevel config', () => {
-        process.env[`ENV2DEEPCONF_LEVELONE__LEVELTWO__LEVELTHREE`] = "myvalue"
+        process.env[`DEEPENV_LEVELONE__LEVELTWO__LEVELTHREE`] = "myvalue"
 
         const config = require('./index.js').config()
         

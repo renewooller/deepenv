@@ -1,8 +1,10 @@
 const _set = require('lodash/set')
 
-let prefix = "ENV2DEEPCONF_"
+let prefix = "DEEPENV_"
+let nesting_divider = "__"
 
 exports.prefix = prefix
+exports.nesting_divider = nesting_divider
 
 function parseEnvValue(value) {
     // don't convert blanks into numbers, use  them
