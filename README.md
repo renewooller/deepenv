@@ -59,7 +59,7 @@ Observe the generated config
 
 Many configuration parameters need not be specified by the environment. These are the first argument to **deepenv**, so they can be merged with those that _are_ specified by the environment.
 
-Options, such as a custom prefix for environment variables that are used by **deepenv**, are supplied in the second argument.
+The second argument is an object containing options, such as a custom prefix for environment variables that are used by **deepenv**.
 
 With a double-underscored environment variable:
 ```bash
