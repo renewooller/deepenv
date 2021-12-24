@@ -1,7 +1,7 @@
 # deepenv
 Generates a deeply nested configuration object suitable for backend apps, using environment variables.
 
-[![NPM version](https://img.shields.io/npm/v/deepenv.svg?style=flat-square)](https://www.npmjs.com/package/deepenv)
+[![NPM version](https://img.shields.io/npm/v/deepenv.svg?style=flat-square)](https://www.npmjs.com/package/deepenv) [![CircleCI](https://circleci.com/gh/renewooller/deepenv/tree/main.svg?style=svg)](https://circleci.com/gh/renewooller/deepenv/tree/main)
 
 [Best practice](https://12factor.net/config) demands that configuration that changes across environments should be contained in the environment rather than in code. This helps with security, managing environments, portability and open-source development.
 
