@@ -31,7 +31,7 @@ function parseEnvValue(value) {
 
 /**
  * returns a copy 
- * @param {*} original (optional) 
+ * @param {*} original (optional) configuration object to be merged with environment
  * @param {} opts (optional) options to specify the
  *   prefix:  for environment variable names that are to be included in configurations, default "DEEPENV_"
  *   nesting_delimiter: the delimiter in the environment variable name used to signify a nesting level in the config object, default "__" 
