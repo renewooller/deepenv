@@ -6,4 +6,4 @@ declare interface options {
     custom_nesting_delimiter? : string
 }
 
-declare function config<T extends {[key:string]: any}>(original :T, options: options): T
+declare function deepenv<T extends {[key:string]: any}>(original? :T, options?: options): T

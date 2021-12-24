@@ -1,3 +1,4 @@
+const deepenv = require('deepenv').deepenv
 
 describe('parse', () => {
 
@@ -10,7 +11,7 @@ describe('parse', () => {
         process.env['DEEPENV_SPACES'] = '   '
         process.env['DEEPENV_NULLTEXT'] = 'null'
         process.env['DEEPENV_UNDEFINEDTEXT'] = 'undefined'
-        const config  = require('./index.js').config()
+        const config  = deepenv()
         
         expect(config['blank']).toBeUndefined()
         expect(config['nulltext']).toEqual('null')
@@ -26,7 +27,7 @@ describe('parse', () => {
         process.env[`DEEPENV_NUMBER_NEGATIVE100`] = '-100'
         
         
-        const config = require('./index.js').config()
+        const config = deepenv()
         expect(config['number']).toEqual(12)
         expect(config['number_zero']).toEqual(0)
         expect(config['number_one']).toEqual(1)
@@ -42,7 +43,7 @@ describe('parse', () => {
         process.env[`DEEPENV_BOOLEANTRUE_NC`] = 'True'
         process.env[`DEEPENV_BOOLEANFALSE_NC`] = 'False'
 
-        const config = require('./index.js').config()
+        const config = deepenv()
 
         expect(config['booleantrue']).toEqual(true)
         expect(config['booleanfalse']).toEqual(false)
@@ -59,7 +60,7 @@ describe('parse', () => {
         const obj = { levelOne: { levelTwo : { levelThree : {}}}, num: 0, txt: 'txt', boolTrue: true, boolFalse: false}
         process.env[`DEEPENV_JSON`] = JSON.stringify(obj)
         process.env[`DEEPENV_MALFORMED_JSON`] = '{"levelOne":{"levelTwo":{"levelThree":{}}},"num":0,"txt":"txt","boolTrue":true,"boolFalse":false'
-        const config = require('./index.js').config()
+        const config = deepenv()
 
         expect(config['json']).toEqual(obj)
         expect(config['malformed_json']).toEqual('{"levelOne":{"levelTwo":{"levelThree":{}}},"num":0,"txt":"txt","boolTrue":true,"boolFalse":false')
@@ -68,7 +69,7 @@ describe('parse', () => {
     test('multilevel config', () => {
         process.env[`DEEPENV_LEVELONE__LEVELTWO__LEVELTHREE`] = "myvalue"
 
-        const config = require('./index.js').config()
+        const config = deepenv()
         
         expect(config).toEqual(
             {
@@ -89,7 +90,7 @@ describe('parse', () => {
             to_override : 1
         }
 
-        const config = require('./index.js').config(original_config, {})
+        const config = deepenv(original_config, {})
 
         expect(config).toEqual(
             {

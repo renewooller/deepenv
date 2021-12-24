@@ -38,7 +38,7 @@ npm i deepenv
 Create your application, generating the config using **deepenv** :
 ```node 
 // file: myapp.js
-const config = require('deepenv').config()
+const config = require('deepenv').deepenv() // or ES6: import 'deepenv'; const config = deepenv();
 console.log(config)
 ```
 
@@ -68,7 +68,7 @@ MYAPP_MYDATASTORE__CONNECTION__RETRY_INTERVAL=5s
 
 And **deepenv**:
 ```node
-const config = require('deepenv').config(
+const config = require('deepenv').deepenv(
 {   // pre-existing configuration, not mutated by deepenv
     mydatastore : {
         encoding : 'utf8'

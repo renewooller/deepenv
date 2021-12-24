@@ -37,7 +37,7 @@ function parseEnvValue(value) {
  *   nesting_delimiter: the delimiter in the environment variable name used to signify a nesting level in the config object, default "__" 
  * @returns 
  */
-exports.config  = function config(
+exports.deepenv  = function deepenv(
     original,
     opts, 
     ) {
