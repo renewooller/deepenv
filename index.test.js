@@ -25,7 +25,12 @@ describe('parse', () => {
         process.env[`DEEPENV_NUMBER_ONE`] = '1'
         process.env[`DEEPENV_NUMBER_NEGATIVE`] = '-1'
         process.env[`DEEPENV_NUMBER_NEGATIVE100`] = '-100'
-        
+        process.env[`DEEPENV_NUMBER_FLOAT`] = '0.25'
+        process.env[`DEEPENV_NUMBER_FLOAT2`] = '100.0'
+        process.env[`DEEPENV_NUMBER_FLOAT3`] = '100.'
+        process.env[`DEEPENV_NUMBER_FLOAT4`] = '.1'
+        process.env[`DEEPENV_MALFORMED_FLOAT`] = '100..'
+        process.env[`DEEPENV_MALFORMED_FLOAT2`] = '..123'
         
         const config = deepenv()
         expect(config['number']).toEqual(12)
@@ -33,6 +38,12 @@ describe('parse', () => {
         expect(config['number_one']).toEqual(1)
         expect(config['number_negative']).toEqual(-1)
         expect(config['number_negative100']).toEqual(-100)
+        expect(config['number_float']).toEqual(0.25)
+        expect(config['number_float2']).toEqual(100.0)
+        expect(config['number_float3']).toEqual(100.0)
+        expect(config['number_float4']).toEqual(0.1)
+        expect(config['malformed_float']).toEqual('100..')
+        expect(config['malformed_float2']).toEqual('..123')
     })
     
     test('parse_boolean', () => {
